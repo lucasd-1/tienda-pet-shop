@@ -10,16 +10,7 @@
 			<li><a href="<?=base_url?>carrito/index">Ver el carrito</a></li>
 		</ul>
 	</div>
-	
-        <div id="buscador" class="block_aside">
-		
-			<h3>Buscar</h3>
-			<form action="<?=base_url?>buscar.php" method="post">
-                            <input type="text" name="busqueda" />
-                            <input type="submit" value="Buscar" />
-			</form>
-	</div>
-    
+	          
 	<div id="login" class="block_aside">
 		
 		<?php if(!isset($_SESSION['identity'])): ?>

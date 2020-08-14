@@ -28,7 +28,7 @@ class categoriaController{
             $productos = $producto->getAllCategory();
         }
         
-        require_once 'views/categoria/ver.php';
+        require_once 'views/producto/lista.php';
     }
     
     public function crear(){

@@ -23,6 +23,18 @@ class productoController{
 		}
 		require_once 'views/producto/ver.php';
 	}
+        
+        public function buscar(){
+		if(isset($_POST['busqueda'])){
+			$busqueda = $_POST['busqueda'];
+		
+			$producto = new Producto();
+					
+			$productos = $producto->buscarProduct($busqueda);
+			
+		}
+		require_once 'views/producto/lista.php';
+	}
 	
 	public function gestion(){
 		Utils::isAdmin();
