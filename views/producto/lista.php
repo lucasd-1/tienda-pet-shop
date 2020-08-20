@@ -1,9 +1,9 @@
-<?php
-
- if (isset($categoria)) : ?>
-    <h1><?= $categoria->nombre ?></h1>
-<?php elseif (isset($subcategoria)) : ?>
-    <h1><?= $subcategoria->nombre ?></h1>
+<?php if (isset($categoria)) : ?>
+    <?php if (isset($subcategoria)) : ?>
+        <h1><?= $subcategoria->nombre ?> para <?= $categoria->nombre ?></h1>
+    <?php else: ?>
+        <h1><?= $categoria->nombre ?></h1>
+    <?php endif; ?>
 <?php else: ?>
     <h1>Resultados de la busqueda</h1>
 <?php endif; ?>
