@@ -3,6 +3,7 @@
 class Producto{
 	private $id;
 	private $categoria_id;
+	private $subcategoria_id;
 	private $nombre;
 	private $descripcion;
 	private $precio;
@@ -24,6 +25,10 @@ class Producto{
 	function getCategoria_id() {
 		return $this->categoria_id;
 	}
+
+    public function getSubcategoria_id() {
+        return $this->subcategoria_id;
+    }
 
 	function getNombre() {
 		return $this->nombre;
@@ -57,9 +62,13 @@ class Producto{
 		$this->id = $id;
 	}
 
-	function setCategoria_id($categoria_id) {
+    function setCategoria_id($categoria_id) {
 		$this->categoria_id = $categoria_id;
 	}
+
+    public function setSubcategoria_id($subcategoria_id): void {
+        $this->subcategoria_id = $subcategoria_id;
+    }
 
 	function setNombre($nombre) {
 		$this->nombre = $this->db->real_escape_string($nombre);
@@ -102,8 +111,28 @@ class Producto{
 		$productos = $this->db->query($sql);
 		return $productos;
 	}
-	
-        public function getRandom($limit){
+
+    public function getAllSubcategory(){
+        $sql = "SELECT p.*, c.nombre AS 'catnombre' FROM productos p "
+            . "INNER JOIN subcategorias c ON c.id = p.subcategoria_id "
+            . "WHERE p.subcategoria_id = {$this->getSubcategoria_id()} "
+            . "ORDER BY id DESC";
+        $productos = $this->db->query($sql);
+        return $productos;
+    }
+
+    public function getAllCategorySubcategory(){
+        $sql = "SELECT p.*, c.nombre AS 'catnombre' FROM productos p "
+            . "INNER JOIN subcategorias c ON c.id = p.subcategoria_id "
+            . "WHERE p.subcategoria_id = {$this->getSubcategoria_id()} "
+            . "AND p.categoria_id = {$this->getCategoria_id()} "
+            . "ORDER BY id DESC";
+        $productos = $this->db->query($sql);
+        return $productos;
+    }
+
+
+    public function getRandom($limit){
 		$productos = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT $limit");
 		return $productos;
 	}
@@ -119,7 +148,18 @@ class Producto{
         }
       
 	public function save(){
-		$sql = "INSERT INTO productos VALUES(NULL, {$this->getCategoria_id()}, '{$this->getNombre()}', '{$this->getDescripcion()}', {$this->getPrecio()}, {$this->getStock()}, null, CURDATE(), '{$this->getImagen()}');";
+		$sql = "INSERT INTO productos VALUES(
+                     NULL, 
+                     {$this->getCategoria_id()},
+                     {$this->getSubcategoria_id()}, 
+                     '{$this->getNombre()}', 
+                     '{$this->getDescripcion()}', 
+                     {$this->getPrecio()}, 
+                     {$this->getStock()}, 
+                     null, 
+                     CURDATE(), 
+                     '{$this->getImagen()}'
+                );";
 		$save = $this->db->query($sql);
 		
 		$result = false;
@@ -130,7 +170,13 @@ class Producto{
 	}
 	
 	public function edit(){
-		$sql = "UPDATE productos SET nombre='{$this->getNombre()}', descripcion='{$this->getDescripcion()}', precio={$this->getPrecio()}, stock={$this->getStock()}, categoria_id={$this->getCategoria_id()}  ";
+		$sql = "UPDATE productos SET 
+                     nombre='{$this->getNombre()}', 
+                     descripcion='{$this->getDescripcion()}', 
+                     precio={$this->getPrecio()}, 
+                     stock={$this->getStock()}, 
+                     categoria_id={$this->getCategoria_id()},  
+                     subcategoria_id={$this->getSubcategoria_id()}";
 		
 		if($this->getImagen() != null){
 			$sql .= ", imagen='{$this->getImagen()}'";

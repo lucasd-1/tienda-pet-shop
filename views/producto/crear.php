@@ -10,7 +10,7 @@
     
         <form action="<?=$url_action?>" method="POST" enctype="multipart/form-data">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" value="<?=isset($pro) && is_object($pro) ? $pro->nombre : ''?>;" required="" />
+        <input type="text" name="nombre" value="<?=isset($pro) && is_object($pro) ? $pro->nombre : ''?>" required="" />
 
         <label for="descripcion">Descripción</label>
         <textarea name="descripcion"><?=isset($pro) && is_object($pro) ? $pro->descripcion : ''?></textarea> 
@@ -31,7 +31,17 @@
             <?php endwhile; ?>
         </select>
 
-        <label for="imagen">Imagen</label>
+        <label for="subcategoria">Subcategoria</label>
+        <?php $subcategorias = utils::showSubcategorias(); ?>
+        <select name="subcategoria">
+            <?php while ($cat = $subcategorias->fetch_object()): ?>
+                <option value="<?= $cat->id ?>" <?=isset($pro) && is_object($pro) && $cat->id == $pro->subcategoria_id ? 'selected' : ''?>>
+                    <?= $cat->nombre ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+
+            <label for="imagen">Imagen</label>
         <?php if(isset($pro) && is_object($pro) && !empty($pro->imagen)) : ?>
         <img src="<?=base_url?>uploads/images/<?=$pro->imagen?>" class="thumb" />
         <?php endif; ?>

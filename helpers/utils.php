@@ -33,8 +33,22 @@ class Utils{
 		$categorias = $categoria->getAll();
 		return $categorias;
 	}
-	
-	public static function statsCarrito(){
+
+    public static function showSubcategorias(){
+        require_once 'models/Subcategoria.php';
+        $subcategoria = new Subcategoria();
+        $subcategorias = $subcategoria->getAll();
+        return $subcategorias;
+    }
+
+    public static function showProductos() {
+        require_once 'models/producto.php';
+        $producto = new Producto();
+        $productos = $producto->getAll();
+        return $productos;
+    }
+
+    public static function statsCarrito(){
 		$stats = array(
 			'count' => 0,
 			'total' => 0
