@@ -3,7 +3,7 @@
 class Localidad{
     private $id;
     private $id_provincia;
-    private $nombre;
+    private $localidad;
     private $db;
 
     public function __construct() {
@@ -18,8 +18,8 @@ class Localidad{
         return $this->id_provincia;
     }
 
-    function getNombre() {
-        return $this->nombre;
+    function getLocalidad() {
+        return $this->localidad;
     }
 
     function setId($id) {
@@ -30,12 +30,12 @@ class Localidad{
         $this->id_provincia = $id_provincia;
     }
 
-    function setNombre($nombre) {
-        $this->nombre = $this->db->real_escape_string($nombre);
+    function setLocalidad($localidad) {
+        $this->localidad = $this->db->real_escape_string($localidad);
     }
 
     public function getAll(){
-        $localidades = $this->db->query("SELECT * FROM localidades ORDER BY id DESC;");
+        $localidades = $this->db->query("SELECT * FROM localidades ORDER BY id ASC;");
         return $localidades;
     }
 
@@ -46,9 +46,9 @@ class Localidad{
 
     public function getByProvincia() {
         $localidades = $this->db->query(
-            "SELECT * FROM localidades 
+               "SELECT * FROM localidades 
                 WHERE id_provincia={$this->getIdProvincia()} 
-                ORDER BY id DESC;");
+                ORDER BY id ASC;");
         return $localidades;
     }
 

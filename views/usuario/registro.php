@@ -21,27 +21,50 @@
 	<label for="password">Contraseña*</label>
 	<input type="password" name="password" required/>
         
-        <label for="dni">DNI</label>
+    <label for="dni">DNI</label>
 	<input type="number" name="dni" >
         
-        <label for="telefono">Telefono</label>
-	<input type="telefono" name="telefono">
+    <label for="telefono">Telefono</label>
+	<input type="number" name="telefono">
         
-        <label for="direccion">Direccion</label>
+    <label for="direccion">Direccion</label>
 	<input type="text" name="direccion" >
-        
-        //aca iria localidad
-    
-        <label for="userName">Elija un nombre de usuario</label>
+
+    <label for="provincia">Provincia</label>
+    <select name="provincia" id="provincia">
+        <?php while ($prov = $provincias->fetch_object()): ?>
+            <option value="<?=$prov->id?>"><?=$prov->provincia?></option>
+        <?php endwhile; ?>
+    </select>
+
+    <label for="localidad">Localidad</label>
+
+        <div id="opciones_localidades">
+            <select name="localidad" id="localidad">
+                <?php while ($loc = $localidades->fetch_object()): ?>
+                    <option value="<?=$loc->id?>"><?=$loc->localidad?></option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+<!--        --><?php //if (!empty($_POST["provincia"])) : ?>
+<!--            --><?php //$provId = $_POST["provincia"]; ?>
+<!--            --><?php //while ($loc = $localidades->fetch_object()) : ?>
+<!--                --><?php //if ($loc->getIdProvincia() === $provId) : ?>
+<!--                    <option value="--><?//=$loc->localidad?><!--">--><?//=$loc->localidad?><!--</option>-->
+<!--                --><?php //endif; ?>
+<!--            --><?php //endwhile; ?>
+<!--        --><?php //endif; ?>
+
+    <label for="userName">Elija un nombre de usuario</label>
 	<input type="text" name="username">
         
-        <label for="imagenusuario">Imagen</label>
-        <?php if(isset($pro) && is_object($pro) && !empty($pro->imagenusuario)) : ?>
+    <label for="imagenusuario">Imagen</label>
+    <?php if(isset($pro) && is_object($pro) && !empty($pro->imagenusuario)) : ?>
         <img src="<?=base_url?>uploads/imgsUsers/<?=$pro->imagenusuario?>" class="thumb" />
-        <?php endif; ?>
-        <input type="file" name="imagenusuario" />
-        
-        <p><br><br>*Los datos con asterisco son obligatorios </p>
+    <?php endif; ?>
+    <input type="file" name="imagenusuario" />
+
+    <p><br>*Los datos con asterisco son obligatorios </p>
 	
 	<input type="submit" value="Registrarse" />
 </form>

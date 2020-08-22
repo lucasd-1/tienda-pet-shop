@@ -13,8 +13,8 @@ class usuario{
     private $telefono;
     private $direccion;
     private $username;
-    
-    
+    private $localidad;
+
     public function __construct() {
         $this->db = dataBase::connect(); 
     }
@@ -63,6 +63,10 @@ class usuario{
         return $this->username; 
     }
 
+    function getLocalidad() {
+        return $this->localidad;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -103,12 +107,21 @@ class usuario{
         $this->username = $username; 
     }
 
+    function setLocalidad($localidad) {
+        $this->localidad = $localidad;
+    }
+
     function setImagenusuario($imagenusuario) {
         $this->imagenusuario = $imagenusuario;
     }
 
     public function save(){
-        $sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', '{$this->getEmail()}', '{$this->getPassword()}', '2', '{$this->getDni()}', '{$this->getTelefono()}', '{$this->getDireccion()}', '1', '{$this->getUsername()}', NOW(), NULL, NULL, '{$this->getImagenusuario()}');";
+        $sql = "INSERT INTO usuarios 
+                VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', 
+                       '{$this->getEmail()}', '{$this->getPassword()}', {$this->getRol()}, 
+                       '{$this->getDni()}', '{$this->getTelefono()}', 
+                       '{$this->getDireccion()}', '{$this->getLocalidad()}', '{$this->getUsername()}', 
+                       NOW(), NULL, NULL, '{$this->getImagenusuario()}');";
         $save = $this->db->query($sql);
         
         $result = FALSE;
