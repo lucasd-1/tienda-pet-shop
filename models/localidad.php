@@ -46,7 +46,7 @@ class Localidad{
 
     public function getByProvincia() {
         $localidades = $this->db->query(
-                "SELECT * FROM localidades 
+            "SELECT * FROM localidades 
                 WHERE id_provincia={$this->getIdProvincia()} 
                 ORDER BY id DESC;");
         return $localidades;

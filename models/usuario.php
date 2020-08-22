@@ -7,8 +7,13 @@ class usuario{
     private $email;
     private $password;
     private $rol;
-    private $imagen;
+    private $imagenusuario;
     private $db;
+    private $dni;
+    private $telefono;
+    private $direccion;
+    private $username;
+    
     
     public function __construct() {
         $this->db = dataBase::connect(); 
@@ -38,8 +43,24 @@ class usuario{
         return $this->rol;
     }
 
-    function getImagen() {
-        return $this->imagen;
+    function getImagenusuario() {
+        return $this->imagenusuario;
+    }
+    
+    function getDni() {
+        return $this->dni;
+    }
+    
+    function getTelefono() {
+        return $this->telefono; 
+    }
+    
+    function getDireccion() {
+        return $this->direccion; 
+    }
+    
+    function getUsername() {
+        return $this->username; 
     }
 
     function setId($id) {
@@ -65,13 +86,29 @@ class usuario{
     function setRol($rol) {
         $this->rol = $rol;
     }
+    
+    function setDni($dni) {
+        $this->dni = $dni; 
+    }
+    
+    function setTelefono($telefono) {
+        $this->telefono = $telefono; 
+    }
+    
+    function setDireccion($direccion) {
+        $this->direccion = $direccion; 
+    }
+    
+    function setUsername($username) {
+        $this->username = $username; 
+    }
 
-    function setImagen($imagen) {
-        $this->imagen = $imagen;
+    function setImagenusuario($imagenusuario) {
+        $this->imagenusuario = $imagenusuario;
     }
 
     public function save(){
-        $sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', '{$this->getEmail()}', '{$this->getPassword()}', 'user', NULL);";
+        $sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', '{$this->getEmail()}', '{$this->getPassword()}', '2', '{$this->getDni()}', '{$this->getTelefono()}', '{$this->getDireccion()}', '1', '{$this->getUsername()}', NOW(), NULL, NULL, '{$this->getImagenusuario()}');";
         $save = $this->db->query($sql);
         
         $result = FALSE;
