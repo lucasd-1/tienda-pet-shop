@@ -1,5 +1,5 @@
 <?php
 
-define("base_url", "http://localhost/tienda-pet-shop/");
+define("base_url", env('BASE_PATH'));
 define("controller_default", "productoController");
 define("action_default", "index");
