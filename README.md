@@ -1,12 +1,8 @@
 # tienda-pet-shop
 
-Readme in progress
+PHP + MySQL. Proyecto educativo
 
-Proyecto tienda poo
-
-Archivo README de prueba. Desarrollado con php.
-
-## Instrucciones
+## Instrucciones para Windows
 
 1. instalar jdk8 (https://www.apache.org/dyn/closer.cgi/netbeans/netbeans/12.0/Apache-NetBeans-12.0-bin-windows-x64.exe)
 	- Si se elige instalar Netbeans como IDE no hace falta instalar la JDK por separado ya que el IDE lo instala. 
