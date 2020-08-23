@@ -38,22 +38,13 @@
     </select>
 
     <label for="localidad">Localidad</label>
-
-        <div id="opciones_localidades">
-            <select name="localidad" id="localidad">
-                <?php while ($loc = $localidades->fetch_object()): ?>
-                    <option value="<?=$loc->id?>"><?=$loc->localidad?></option>
-                <?php endwhile; ?>
-            </select>
-        </div>
-<!--        --><?php //if (!empty($_POST["provincia"])) : ?>
-<!--            --><?php //$provId = $_POST["provincia"]; ?>
-<!--            --><?php //while ($loc = $localidades->fetch_object()) : ?>
-<!--                --><?php //if ($loc->getIdProvincia() === $provId) : ?>
-<!--                    <option value="--><?//=$loc->localidad?><!--">--><?//=$loc->localidad?><!--</option>-->
-<!--                --><?php //endif; ?>
-<!--            --><?php //endwhile; ?>
-<!--        --><?php //endif; ?>
+    <div id="opciones_localidades">
+        <select name="localidad" id="localidad">
+            <?php while ($loc = $localidades->fetch_object()): ?>
+                <option value="<?=$loc->id?>"><?=$loc->localidad?></option>
+            <?php endwhile; ?>
+        </select>
+    </div>
 
     <label for="userName">Elija un nombre de usuario</label>
 	<input type="text" name="username">

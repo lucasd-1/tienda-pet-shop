@@ -20,7 +20,6 @@ class usuarioController{
 	
 	public function save(){
 		if(isset($_POST)){
-			
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
 			$apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
 			$email = isset($_POST['email']) ? $_POST['email'] : false;
