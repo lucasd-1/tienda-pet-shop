@@ -90,7 +90,7 @@ class usuarioController{
 			if($identity && is_object($identity)){
 				$_SESSION['identity'] = $identity;
 				
-				if($identity->rol == 'admin'){
+				if($identity->permiso_id == 1){
 					$_SESSION['admin'] = true;
 				}
 				
