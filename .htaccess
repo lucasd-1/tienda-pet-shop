@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 # activar rewrite
 RewriteEngine on
-ErrorDocument 404 http://localhost/tienda-pet-shop/
+ErrorDocument 404 ${BASE_PATH}
 
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f

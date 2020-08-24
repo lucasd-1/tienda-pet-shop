@@ -281,43 +281,6 @@ INSERT INTO `permisos` (`id`, `Descripcion`) VALUES
 (1, 'admin'),
 (2, 'usuario');
 
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`id`, `categoria_id`, `nombre`, `descripcion`, `precio`, `stock`, `oferta`, `fecha`, `imagen`, `subcategoria_id`, `proveedor`, `tags`, `precio_venta`, `img2`, `img3`) VALUES
-(2, 1, 'Ratita', 'Ratita de juguete multicolor con hierba gatera en su interior.', 90, 11, NULL, NULL, 'ratita.jpg', 3, NULL, NULL, NULL, NULL, NULL),
-(3, 1, 'Gimnasio rascador', 'Gimnasio para gatos, con juguete y rascador sisal. Colores rosa, violeta, negro y blanco.', 1600, 6, NULL, '2020-08-09', 'rascadorGimnasio.jpg', 3, '', '', 0, '', ''),
-(4, 2, 'Soga trenzada', 'soga trenzada para perro mediana y resistente. Colores rosa, celeste, verde (moteada). Para perros chicos y medianos.', 90, 7, NULL, '2020-08-15', 'Soga trenzada para perros.jpg', 1, NULL, NULL, NULL, NULL, NULL),
-(5, 2, 'Diario con chifle', 'Diario con chifle para perros chicos y medianos. 16 cm de ancho. Color hueso.', 215.9, 7, NULL, '2020-08-15', 'diario chifle.JPG', 1, NULL, NULL, NULL, NULL, NULL),
-(6, 4, 'Kit pecera completa', 'El kit Incuye\r\nPecera de vidrio de 60x35x20\r\n6 placas biologicas\r\n1,5 metros de manguera\r\n1 ventosa\r\n1 piedra difusora\r\n1 pico o cono\r\nGrava para cubrir la base\r\nplanta decorativa\r\nAlimento Tetra pond (la mejor marca del mercado)\r\n1 aireador de 1 salida marca RS\r\n1 aticloro de 80cc', 1990, 4, NULL, '2020-08-15', 'pecera kit.JPG', 1, NULL, NULL, NULL, NULL, NULL),
-(7, 3, 'Bebedero chupete 125 ml', 'Bebedero para hamsters y roedores en general. Varios colores! de 125 ml y de plástico.', 325.9, 15, NULL, '2020-08-15', 'bebedero chupete.JPG', 1, NULL, NULL, NULL, NULL, NULL);
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `email`, `password`, `permiso_id`, `dni`, `telefono`, `direccion`, `localidad_id`, `userName`, `fecha_registro`, `fecha_ult_pedido`, `Saldo`, `imagen`) VALUES
-(1, 'Admin', 'Admin', 'admin@admin.com', 'contraseÃ±a', 1, 0, 0, '', 123, '', '', '', 0, NULL),
-(2, 'admin', 'istrador', 'admin@tienda', '$2y$04$G/8iFQkOb1CBeXIjEWcHBeJ8aMC4NzDRrHy0b5GwasNJuNTz88.GS', 1, 0, 0, '', 456, '', '', '', 0, NULL),
-(3, 'naichi', 'galaxy', 'naichis@gmail.com', '1234', 1, 32222222, NULL, NULL, 823, NULL, NULL, NULL, NULL, NULL),
-(4, 'a', 'a', 'a@a', '1234', 1, NULL, NULL, NULL, 738, NULL, NULL, NULL, NULL, NULL),
-(5, 'qq', 'qqq', 'q@q', '$2y$04$rnuFbyFO9XlV88.F/uD90uSuxKCkTGEIUvejTDQUrKIzsFvE4UDj6', 2, NULL, NULL, NULL, 1400, NULL, NULL, NULL, NULL, NULL),
-(7, 'prueba', 'pp', 'prueba@a', '$2y$04$62SMmUKEO/UhN6g7Va1bwODGCuq.5n6LOJd0X5yPU3bTcSeeWBSsC', 2, NULL, NULL, NULL, 2000, NULL, NULL, NULL, NULL, NULL);
-
---
--- Volcado de datos para la tabla `pedidos`
---
-
-INSERT INTO `pedidos` (`id`, `usuario_id`, `provincia`, `localidad`, `direccion`, `coste`, `id_estado_pedido`, `fecha`, `hora`, `forma_pago`, `comprobante`, `saldo`) VALUES
-(1, 7, 'jujuy', 'jujuy capital (?', 'sarandi 346', 90, 1, '2020-08-15', '19:24:43', NULL, NULL, NULL);
-
---
--- Volcado de datos para la tabla `lineas_pedidos`
---
-
-INSERT INTO `lineas_pedidos` (`id`, `pedido_id`, `producto_id`, `unidades`) VALUES
-(1, 1, 2, 1);
 
 --
 -- Volcar la base de datos para la tabla `provincias`
@@ -2738,6 +2701,45 @@ INSERT INTO `localidades` (`id`, `id_provincia`, `localidad`) VALUES
 (2380, 25, 'Yánima'),
 (2381, 25, 'Yerba Buena'),
 (2382, 25, 'Yerba Buena (S)');
+
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `categoria_id`, `nombre`, `descripcion`, `precio`, `stock`, `oferta`, `fecha`, `imagen`, `subcategoria_id`, `proveedor`, `tags`, `precio_venta`, `img2`, `img3`) VALUES
+(2, 1, 'Ratita', 'Ratita de juguete multicolor con hierba gatera en su interior.', 90, 11, NULL, NULL, 'ratita.jpg', 3, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 'Gimnasio rascador', 'Gimnasio para gatos, con juguete y rascador sisal. Colores rosa, violeta, negro y blanco.', 1600, 6, NULL, '2020-08-09', 'rascadorGimnasio.jpg', 3, '', '', 0, '', ''),
+(4, 2, 'Soga trenzada', 'soga trenzada para perro mediana y resistente. Colores rosa, celeste, verde (moteada). Para perros chicos y medianos.', 90, 7, NULL, '2020-08-15', 'Soga trenzada para perros.jpg', 1, NULL, NULL, NULL, NULL, NULL),
+(5, 2, 'Diario con chifle', 'Diario con chifle para perros chicos y medianos. 16 cm de ancho. Color hueso.', 215.9, 7, NULL, '2020-08-15', 'diario chifle.JPG', 1, NULL, NULL, NULL, NULL, NULL),
+(6, 4, 'Kit pecera completa', 'El kit Incuye\r\nPecera de vidrio de 60x35x20\r\n6 placas biologicas\r\n1,5 metros de manguera\r\n1 ventosa\r\n1 piedra difusora\r\n1 pico o cono\r\nGrava para cubrir la base\r\nplanta decorativa\r\nAlimento Tetra pond (la mejor marca del mercado)\r\n1 aireador de 1 salida marca RS\r\n1 aticloro de 80cc', 1990, 4, NULL, '2020-08-15', 'pecera kit.JPG', 1, NULL, NULL, NULL, NULL, NULL),
+(7, 3, 'Bebedero chupete 125 ml', 'Bebedero para hamsters y roedores en general. Varios colores! de 125 ml y de plástico.', 325.9, 15, NULL, '2020-08-15', 'bebedero chupete.JPG', 1, NULL, NULL, NULL, NULL, NULL);
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `email`, `password`, `permiso_id`, `dni`, `telefono`, `direccion`, `localidad_id`, `userName`, `fecha_registro`, `fecha_ult_pedido`, `Saldo`, `imagen`) VALUES
+(1, 'Admin', 'Admin', 'admin@admin.com', 'contraseÃ±a', 1, 0, 0, '', 123, '', '', '', 0, NULL),
+(2, 'admin', 'istrador', 'admin@tienda', '$2y$04$G/8iFQkOb1CBeXIjEWcHBeJ8aMC4NzDRrHy0b5GwasNJuNTz88.GS', 1, 0, 0, '', 456, '', '', '', 0, NULL),
+(3, 'naichi', 'galaxy', 'naichis@gmail.com', '1234', 1, 32222222, NULL, NULL, 823, NULL, NULL, NULL, NULL, NULL),
+(4, 'a', 'a', 'a@a', '1234', 1, NULL, NULL, NULL, 738, NULL, NULL, NULL, NULL, NULL),
+(5, 'qq', 'qqq', 'q@q', '$2y$04$rnuFbyFO9XlV88.F/uD90uSuxKCkTGEIUvejTDQUrKIzsFvE4UDj6', 2, NULL, NULL, NULL, 1400, NULL, NULL, NULL, NULL, NULL),
+(7, 'prueba', 'pp', 'prueba@a', '$2y$04$62SMmUKEO/UhN6g7Va1bwODGCuq.5n6LOJd0X5yPU3bTcSeeWBSsC', 2, NULL, NULL, NULL, 2000, NULL, NULL, NULL, NULL, NULL);
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `usuario_id`, `provincia`, `localidad`, `direccion`, `coste`, `id_estado_pedido`, `fecha`, `hora`, `forma_pago`, `comprobante`, `saldo`) VALUES
+(1, 7, 'jujuy', 'jujuy capital (?', 'sarandi 346', 90, 1, '2020-08-15', '19:24:43', NULL, NULL, NULL);
+
+--
+-- Volcado de datos para la tabla `lineas_pedidos`
+--
+
+INSERT INTO `lineas_pedidos` (`id`, `pedido_id`, `producto_id`, `unidades`) VALUES
+(1, 1, 2, 1);
 
 COMMIT;
 
