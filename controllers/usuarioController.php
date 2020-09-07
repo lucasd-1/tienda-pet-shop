@@ -10,11 +10,12 @@ class usuarioController{
 	}
 	
 	public function registro(){
-	    $provincia = new Provincia();
+        $provincia = new Provincia();
 	    $provincias = $provincia->getAll();
 	    $localidad = new Localidad();
 	    $localidad->setIdProvincia(1);
 	    $localidades = $localidad->getByProvincia();
+
 		require_once 'views/usuario/registro.php';
 	}
 	

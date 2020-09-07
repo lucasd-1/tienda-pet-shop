@@ -24,7 +24,7 @@ class productoController{
 		require_once 'views/producto/ver.php';
 	}
         
-        public function buscar(){
+    public function buscar(){
 		if(isset($_POST['busqueda'])){
 			$busqueda = $_POST['busqueda'];
 		
@@ -49,7 +49,8 @@ class productoController{
 		Utils::isAdmin();
 		require_once 'views/producto/crear.php';
 	}
-	
+
+	// TODO: agregar validaciones de file upload https://www.php.net/manual/en/features.file-upload.php
 	public function save(){
 		Utils::isAdmin();
 		if(isset($_POST)){
@@ -57,11 +58,15 @@ class productoController{
 			$descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
 			$precio = isset($_POST['precio']) ? $_POST['precio'] : false;
 			$stock = isset($_POST['stock']) ? $_POST['stock'] : false;
-			$categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
+            $oferta = isset($_POST['oferta']) ? $_POST['oferta'] : false;
+            $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
             $subcategoria = isset($_POST['subcategoria']) ? $_POST['subcategoria'] : false;
-			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
-			
-			if($nombre && $descripcion && $precio && $stock && $categoria && $subcategoria){
+			$proveedor = isset($_POST['proveedor']) ? $_POST['proveedor'] : false;
+			$tags = isset($_POST['tags']) ? $_POST['tags'] : false;
+            $precio_venta = isset($_POST['precio_venta']) ? $_POST['precio_venta'] : false;
+
+
+            if($nombre && $descripcion && $precio && $stock && $categoria && $subcategoria){
 				$producto = new Producto();
 				$producto->setNombre($nombre);
 				$producto->setDescripcion($descripcion);
@@ -70,24 +75,50 @@ class productoController{
 				$producto->setCategoria_id($categoria);
                 $producto->setSubcategoria_id($subcategoria);
 
-				// Guardar la imagen
-				if(isset($_FILES['imagen'])){
-					$file = $_FILES['imagen'];
-					$filename = $file['name'];
-					$mimetype = $file['type'];
+                $producto->setOferta($oferta);
+                $producto->setProveedor($proveedor);
+                $producto->setTags($tags);
+                $producto->setPrecioVenta($precio_venta);
 
-					if($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif'){
+                $producto->setImagen2($_POST['imagen2_current']);
+                $producto->setImagen3($_POST['imagen3_current']);
 
-						if(!is_dir('uploads/images')){
-							mkdir('uploads/images', 0777, true);
-						}
+                // Guardar la imagen
+                foreach($_FILES as $key => $value) {
+                    $filename = $value['name'];
+                    $mimetype = $value['type'];
+                    $_SESSION['file'] = $value;
 
-						$producto->setImagen($filename);
-						move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
-					}
-				}
-				
-				if(isset($_GET['id'])){
+                    if($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif'){
+
+                        if(!is_dir('uploads/images')){
+                            mkdir('uploads/images', 0777, true);
+                        }
+
+                        switch ($key) {
+                            case 'imagen1':
+                                $producto->setImagen($filename);
+                                break;
+                            case 'imagen2':
+                                $producto->setImagen2($filename);
+                                break;
+                            case 'imagen3':
+                                $producto->setImagen3($filename);
+                                break;
+                        }
+                        move_uploaded_file($value['tmp_name'], 'uploads/images/'.$filename);
+                    }
+                }
+
+                // Borrar imagenes
+                if (isset($_POST['delete-imagen2'])) {
+                    $producto->setImagen2(null);
+                }
+                if (isset($_POST['delete-imagen3'])) {
+                    $producto->setImagen3(null);
+                }
+
+                if(isset($_GET['id'])){
 					$id = $_GET['id'];
 					$producto->setId($id);
 					
@@ -95,7 +126,7 @@ class productoController{
 				}else{
 					$save = $producto->save();
 				}
-				
+
 				if($save){
 					$_SESSION['producto'] = "complete";
 				}else{

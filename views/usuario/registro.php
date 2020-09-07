@@ -8,7 +8,7 @@
 <?php endif; ?>
 <?php Utils::deleteSession('register'); ?>
 
-<form action="<?=base_url?>usuario/save" method="POST">
+<form action="<?=base_url?>usuario/reglaDificil" method="POST">
 	<label for="nombre">Nombre*</label>
 	<input type="text" name="nombre" required/>
 	

@@ -10,9 +10,14 @@ class Producto{
 	private $stock;
 	private $oferta;
 	private $fecha;
-	private $imagen;
+    private $proveedor;
+    private $tags;
+    private $imagen;
+    private $imagen2;
+    private $imagen3;
+    private $precio_venta;
 
-	private $db;
+    private $db;
 	
 	public function __construct() {
 		$this->db = Database::connect();
@@ -26,7 +31,7 @@ class Producto{
 		return $this->categoria_id;
 	}
 
-    public function getSubcategoria_id() {
+    function getSubcategoria_id() {
         return $this->subcategoria_id;
     }
 
@@ -58,7 +63,27 @@ class Producto{
 		return $this->imagen;
 	}
 
-	function setId($id) {
+    function getProveedor() {
+        return $this->proveedor;
+    }
+
+    function getTags() {
+        return $this->tags;
+    }
+
+    function getImagen2() {
+        return $this->imagen2;
+    }
+
+    function getImagen3() {
+        return $this->imagen3;
+    }
+
+    function getPrecioVenta() {
+        return $this->precio_venta;
+    }
+
+    function setId($id) {
 		$this->id = $id;
 	}
 
@@ -98,6 +123,26 @@ class Producto{
 		$this->imagen = $imagen;
 	}
 
+    function setProveedor($proveedor) {
+        $this->proveedor = $proveedor;
+    }
+
+    function setTags($tags) {
+        $this->tags = $tags;
+    }
+
+    function setImagen2($imagen2) {
+        $this->imagen2 = $imagen2;
+    }
+
+    function setImagen3($imagen3) {
+        $this->imagen3 = $imagen3;
+    }
+
+    function setPrecioVenta($precio_venta) {
+	    $this->precio_venta = $precio_venta;
+    }
+
 	public function getAll(){
 		$productos = $this->db->query("SELECT * FROM productos ORDER BY id DESC");
 		return $productos;
@@ -131,42 +176,42 @@ class Producto{
         return $productos;
     }
 
-
     public function getRandom($limit){
 		$productos = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT $limit");
 		return $productos;
 	}
 	
-        public function getOne(){
+    public function getOne(){
 		$producto = $this->db->query("SELECT * FROM productos WHERE id = {$this->getId()}");
 		return $producto->fetch_object();
 	}
         
-        public function buscarProduct($busqueda){
-            $productos = $this->db->query("SELECT * FROM productos WHERE nombre LIKE '%$busqueda%'");
-            return $productos;
-        }
+    public function buscarProduct($busqueda){
+        $productos = $this->db->query("SELECT * FROM productos WHERE nombre LIKE '%$busqueda%'");
+        return $productos;
+    }
       
 	public function save(){
 		$sql = "INSERT INTO productos VALUES(
                      NULL, 
                      {$this->getCategoria_id()},
-                     {$this->getSubcategoria_id()}, 
                      '{$this->getNombre()}', 
                      '{$this->getDescripcion()}', 
                      {$this->getPrecio()}, 
-                     {$this->getStock()}, 
-                     null, 
-                     CURDATE(), 
-                     '{$this->getImagen()}'
-                );";
-		$save = $this->db->query($sql);
-		
-		$result = false;
-		if($save){
-			$result = true;
-		}
-		return $result;
+                     {$this->getStock()}";
+
+        $sql .= $this->getOferta() != null ? ", '{$this->getOferta()}'" : ",NULL";
+        $sql .= ", CURDATE(),
+                '{$this->getImagen()}',
+                {$this->getSubcategoria_id()}";
+        $sql .= $this->getProveedor() != null ? ", '{$this->getProveedor()}'" : ",NULL";
+        $sql .= $this->getTags() != null ? ", '{$this->getTags()}'" : ",NULL";
+        $sql .= $this->getPrecioVenta() != null ? ", '{$this->getPrecioVenta()}'" : ",NULL";
+        $sql .= $this->getImagen2() != null ? ", '{$this->getImagen2()}'" : ",NULL";
+        $sql .= $this->getImagen3() != null ? ", '{$this->getImagen3()}'" : ",NULL";
+        $sql .= ");";
+
+		return $save = $this->db->query($sql);
 	}
 	
 	public function edit(){
@@ -176,15 +221,18 @@ class Producto{
                      precio={$this->getPrecio()}, 
                      stock={$this->getStock()}, 
                      categoria_id={$this->getCategoria_id()},  
-                     subcategoria_id={$this->getSubcategoria_id()}";
+                     subcategoria_id={$this->getSubcategoria_id()},
+                     oferta='{$this->getOferta()}',
+                     proveedor='{$this->getProveedor()}',
+                     tags='{$this->getTags()}'";
 		
 		if($this->getImagen() != null){
 			$sql .= ", imagen='{$this->getImagen()}'";
 		}
-		
+
+        $sql .= $this->getImagen2() !== NULL ? ", img2='{$this->getImagen2()}'" : ", img2=NULL";
+        $sql .= $this->getImagen3() !== NULL ? ", img3='{$this->getImagen3()}'" : ", img3=NULL";
 		$sql .= " WHERE id={$this->id};";
-		
-		
 		$save = $this->db->query($sql);
 		
 		$result = false;

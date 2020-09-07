@@ -7,7 +7,7 @@ $variables = [
     'DB_HOST' => 'localhost',
     'DB_USERNAME' => 'root',
     'DB_PASSWORD' => '',
-    'DB_NAME' => 'tienda_master',
+    'DB_NAME' => 'tienda_test',
     'DB_PORT' => '3306'
 ];
 
