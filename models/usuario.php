@@ -14,11 +14,14 @@ class usuario{
     private $direccion;
     private $username;
     private $localidad;
-
-    public function __construct() {
-        $this->db = dataBase::connect(); 
-    }
+    private $token;
+    private $fechaUltimoPedido;
+    private $saldo;
     
+    public function __construct() {
+        $this->db = dataBase::connect();
+    }
+
     function getId() {
         return $this->id;
     }
@@ -66,7 +69,27 @@ class usuario{
     function getLocalidad() {
         return $this->localidad;
     }
+    
+    function getToken(){
+        return $this->token;
+    }
 
+    public function getFechaUltimoPedido() {
+        return $this->fechaUltimoPedido;
+    }
+
+    public function setFechaUltimoPedido($fechaUltimoPedido) {
+        $this->fechaUltimoPedido = $fechaUltimoPedido;
+    }
+
+    public function getSaldo() {
+        return $this->saldo;
+    }
+
+    public function setSaldo($saldo) {
+        $this->saldo = $saldo;
+    }
+    
     function setId($id) {
         $this->id = $id;
     }
@@ -115,21 +138,72 @@ class usuario{
         $this->imagenusuario = $imagenusuario;
     }
 
-    public function save(){
+    function setToken($token) {
+        $this->token = $token;
+    }
+
+    public function getOneByEmail() {
+        $usuario = $this->db->query("SELECT * FROM usuarios WHERE email = '{$this->getEmail()}'");
+        return $usuario->fetch_object();
+    }
+    
+    public function save() {
+        $saldo = $this->getSaldo() ?? 0;
         $sql = "INSERT INTO usuarios 
                 VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', 
                        '{$this->getEmail()}', '{$this->getPassword()}', {$this->getRol()}, 
-                       '{$this->getDni()}', '{$this->getTelefono()}', 
+                       {$this->getDni()}, '{$this->getTelefono()}', 
                        '{$this->getDireccion()}', '{$this->getLocalidad()}', '{$this->getUsername()}', 
-                       NOW(), NULL, NULL, '{$this->getImagenusuario()}');";
+                       NOW(), NULL, {$saldo}, '{$this->getImagenusuario()}', NULL);";
         $save = $this->db->query($sql);
         
-        $result = FALSE;
+        $result = false;
         if($save){
             $result = true;
         }
         return $result;
-    }   
+    }
+
+    public function refreshUserByEmail() {
+        $user = $this->db->query("SELECT * FROM usuarios WHERE email = '{$this->getEmail()}'")->fetch_object();
+        $this->setNombre($user->nombre);
+        $this->setApellidos($user->apellidos);
+        $this->setRol($user->permiso_id);
+        $this->setDni($user->dni);
+        $this->setTelefono($user->telefono);
+        $this->setDireccion($user->direccion);
+        $this->setLocalidad($user->localidad_id);
+        $this->setUsername($user->username);
+        $this->setFechaUltimoPedido($user->fecha_ult_pedido);
+        $this->setSaldo($user->saldo);
+        $this->setImagenusuario($user->imagen);
+    }
+
+    public function edit(){
+        $sql = "UPDATE usuarios SET 
+                    nombre='{$this->getNombre()}',  
+                    apellidos='{$this->getApellidos()}',  
+                    email='{$this->getEmail()}',  
+                    password='{$this->getPassword()}',  
+                    permiso_id={$this->getRol()},   
+                    dni={$this->getDni()}, 
+                    telefono={$this->getTelefono()}, 
+                    direccion='{$this->getDireccion()}', 
+                    localidad_id={$this->getLocalidad()}, 
+                    username='{$this->getUsername()}', 
+                    password='{$this->getPassword()}', 
+                    fecha_ult_pedido='{$this->getFechaUltimoPedido()}', 
+                    saldo={$this->getSaldo()}
+                 ";
+
+        if($this->getImagenusuario() != null){
+            $sql .= ", imagen='{$this->getImagenusuario()}'";
+        }
+
+        $sql .= " WHERE email='{$this->getEmail()}';";
+
+        return $this->db->query($sql);
+    }
     
     public function login(){
         
@@ -152,5 +226,22 @@ class usuario{
             }
         }
         return $result;
+    }
+    
+    function saveToken(){
+        $update = "UPDATE usuarios SET token = '{$this->getToken()}' "
+                . "WHERE email = '{$this->getEmail()}'";
+        return $this->db->query($update);
+    }
+    
+    function deleteToken(){
+        $delete = "UPDATE usuarios SET token = NULL WHERE email = '{$this->email}'";
+        return $this->db->query($delete);
+    }
+    
+    function selectUserByTokenAndEmail(){
+        $usuario = $this->db->query("SELECT * FROM usuarios WHERE token = '{$this->getToken()}' 
+                         AND email = '{$this->getEmail()}'");
+        return $usuario ? $usuario->fetch_object() : false;
     }
 }

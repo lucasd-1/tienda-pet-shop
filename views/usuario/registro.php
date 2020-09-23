@@ -8,7 +8,7 @@
 <?php endif; ?>
 <?php Utils::deleteSession('register'); ?>
 
-<form action="<?=base_url?>usuario/reglaDificil" method="POST">
+<form action="<?=base_url?>usuario/save" method="POST">
 	<label for="nombre">Nombre*</label>
 	<input type="text" name="nombre" required/>
 	
@@ -21,8 +21,8 @@
 	<label for="password">Contraseña*</label>
 	<input type="password" name="password" required/>
         
-    <label for="dni">DNI</label>
-	<input type="number" name="dni" >
+    <label for="dni">DNI*</label>
+	<input type="number" name="dni" required>
         
     <label for="telefono">Telefono</label>
 	<input type="number" name="telefono">
