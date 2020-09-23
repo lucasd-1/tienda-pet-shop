@@ -22,6 +22,7 @@ $(document).on('click', '.edit-image',  event => {
     input.attr('style', 'display: block');
     imgNumber === '1' && input.attr('required', true);
 });
+
 $(document).on('click', '.delete-image',  event => {
     const parent = $(event.target).parent();
     const name = `delete-${$(event.target).next('input').attr('name')}`
@@ -33,8 +34,4 @@ $(document).on('click', '.delete-image',  event => {
     input.attr('style', 'display: block');
     input.value = "";
 });
-
-$(document).on('click', '#enviar-email', event => {
-    $(event.target).button('loading');
-})
 
