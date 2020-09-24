@@ -124,6 +124,10 @@ class pedidoController{
 			header("Location:".base_url);
 		}
 	}
+
+    public function abonar(){
+	    require_once 'views/pedido/abonar.php';
+    }
 	
 	
 }

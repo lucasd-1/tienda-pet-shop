@@ -52,6 +52,10 @@
 	<a href="<?=base_url?>pedido/hacer" class="button button-pedido">Hacer pedido</a>
 </div>
 
+<div class="total-carrito">
+    <a href="<?=base_url?>pedido/abonar" class="button">Abonar</a>
+</div>
+
 <?php else: ?>
 	<p>El carrito está vacio, añade algun producto</p>
 <?php endif; ?>
