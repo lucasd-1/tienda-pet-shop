@@ -138,7 +138,21 @@ class Pedido{
     }
      
     public function save(){
-        $sql = "INSERT INTO pedidos VALUES(NULL, '{$this->getUsuario_id()}' , '{$this->getProvincia()}', '{$this->getLocalidad()}', '{$this->getDireccion()}', {$this->getCoste()}, 'confirm', CURDATE(), CURTIME());";
+        $sql = "INSERT INTO pedidos VALUES(
+                           NULL,
+                           {$this->getUsuario_id()} , 
+                           '{$this->getProvincia()}', 
+                           '{$this->getLocalidad()}', 
+                           '{$this->getDireccion()}', 
+                           {$this->getCoste()}, 
+                           1, 
+                           CURDATE(), 
+                           CURTIME(),
+                           NULL,
+                           NULL,
+                           NULL
+                );";
+
         $save = $this->db->query($sql);
         
         $result = FALSE;
@@ -154,12 +168,17 @@ class Pedido{
         $pedido_id = $query->fetch_object()->pedido;
         
         foreach ($_SESSION['carrito'] as $elemento){
-      $producto = $elemento['producto'];
-      
-      $insert = "INSERT INTO lineas_pedidos VALUES(NULL, {$pedido_id}, {$producto->id}, {$elemento['unidades']})";
-      $this->db->query($insert);
-    }
-    $result = FALSE;
+            $producto = $elemento['producto'];
+
+            $insert = "INSERT INTO lineas_pedidos VALUES( 
+                                      NULL,
+                                      {$pedido_id}, 
+                                      {$producto->id},
+                                      {$elemento['unidades']}
+                      )";
+            $this->db->query($insert);
+        }
+        $result = FALSE;
         if($insert){
             $result = true;
         }

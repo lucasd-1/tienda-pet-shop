@@ -31,8 +31,8 @@ class pedidoController{
 				
 				// Guardar linea pedido
 				$save_linea = $pedido->save_linea();
-				
-				if($save && $save_linea){
+
+                if($save && $save_linea){
 					$_SESSION['pedido'] = "complete";
 				}else{
 					$_SESSION['pedido'] = "failed";

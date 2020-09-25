@@ -127,11 +127,13 @@ DROP TABLE IF EXISTS `lineas_pedidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lineas_pedidos` (
-  `id` int(255) NOT NULL,
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `pedido_id` int(255) NOT NULL,
   `producto_id` int(255) NOT NULL,
-  `unidades` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `unidades` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `lineas_pedidos_id_uindex` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,6 +142,7 @@ CREATE TABLE `lineas_pedidos` (
 
 LOCK TABLES `lineas_pedidos` WRITE;
 /*!40000 ALTER TABLE `lineas_pedidos` DISABLE KEYS */;
+INSERT INTO `lineas_pedidos` VALUES (1,2,11,1);
 /*!40000 ALTER TABLE `lineas_pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +211,7 @@ DROP TABLE IF EXISTS `pedidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pedidos` (
-  `id` int(255) NOT NULL,
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(255) NOT NULL,
   `provincia` varchar(255) NOT NULL,
   `localidad` varchar(255) NOT NULL,
@@ -219,8 +222,10 @@ CREATE TABLE `pedidos` (
   `hora` time DEFAULT NULL,
   `forma_pago` varchar(255) DEFAULT NULL,
   `comprobante` varchar(255) DEFAULT NULL,
-  `saldo` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `saldo` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pedidos_id_uindex` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,6 +234,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
+INSERT INTO `pedidos` VALUES (1,10,'asdasd','asdasd','asdasd',149,1,'2020-09-24','22:02:47',NULL,NULL,NULL),(2,10,'asdasd','asdasd','asdasd',149,1,'2020-09-24','22:12:20',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +338,7 @@ CREATE TABLE `subcategorias` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,7 +389,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Admin','Admin','admin@admin.com','contraseÃ±a',1,0,0,'',123,'','','',0,NULL,NULL),(2,'admin','istrador','admin@tienda','$2y$04$G/8iFQkOb1CBeXIjEWcHBeJ8aMC4NzDRrHy0b5GwasNJuNTz88.GS',1,0,0,'',456,'','','',0,NULL,NULL),(3,'naichi','galaxy','naichis@gmail.com','1234',1,32222222,NULL,NULL,823,NULL,NULL,NULL,0,NULL,NULL),(4,'a','a','a@a','1234',1,NULL,NULL,NULL,738,NULL,NULL,NULL,0,NULL,NULL),(5,'qq','qqq','q@q','$2y$04$rnuFbyFO9XlV88.F/uD90uSuxKCkTGEIUvejTDQUrKIzsFvE4UDj6',2,NULL,NULL,NULL,1400,NULL,NULL,NULL,0,NULL,NULL),(7,'prueba','pp','prueba@a','$2y$04$62SMmUKEO/UhN6g7Va1bwODGCuq.5n6LOJd0X5yPU3bTcSeeWBSsC',2,NULL,NULL,NULL,2000,NULL,NULL,NULL,0,NULL,NULL),(8,'test','etes','asd@asa.com','$2y$04$Q10zv2E8Yn7B8sK4Sg77/.4tPbGz/U092j5LHrRfj5BNbYX1A7H.K',2,1111111111,1111111111,'teet 123',1,'matbruc','2020-08-22 22:47:14',NULL,0,'',NULL),(9,'Mat','Bruc','mat@bruc.com','$2y$04$PO3tmqTTV7jSU1cBoQhlfOAwpNFUD8NGgt5hauc8I8FMZSzjxdfbe',1,1111111111,1111111111,'Test 123',282,'matbruc','2020-08-22 22:49:33',NULL,0,'',NULL),(10,'Matias','Bruchi','matiasbruchi@gmail.com','$2y$04$eUz6rlRuYcQtESojpoRfzOpDKmop2Vt4H0kUXf21m4kBlAaNo/1du',2,111111111,111111111,'Calle Falsa 123',323,'','2020-09-09 19:14:33','',0,'','jtw8ko32h7s05r149fyg');
+INSERT INTO `usuarios` VALUES (1,'Admin','Admin','admin@admin.com','contraseÃ±a',1,0,0,'',123,'','','',0,NULL,NULL),(2,'admin','istrador','admin@tienda','$2y$04$G/8iFQkOb1CBeXIjEWcHBeJ8aMC4NzDRrHy0b5GwasNJuNTz88.GS',1,0,0,'',456,'','','',0,NULL,NULL),(3,'naichi','galaxy','naichis@gmail.com','1234',1,32222222,NULL,NULL,823,NULL,NULL,NULL,0,NULL,NULL),(4,'a','a','a@a','1234',1,NULL,NULL,NULL,738,NULL,NULL,NULL,0,NULL,NULL),(5,'qq','qqq','q@q','$2y$04$rnuFbyFO9XlV88.F/uD90uSuxKCkTGEIUvejTDQUrKIzsFvE4UDj6',2,NULL,NULL,NULL,1400,NULL,NULL,NULL,0,NULL,NULL),(7,'prueba','pp','prueba@a','$2y$04$62SMmUKEO/UhN6g7Va1bwODGCuq.5n6LOJd0X5yPU3bTcSeeWBSsC',2,NULL,NULL,NULL,2000,NULL,NULL,NULL,0,NULL,NULL),(8,'test','etes','asd@asa.com','$2y$04$Q10zv2E8Yn7B8sK4Sg77/.4tPbGz/U092j5LHrRfj5BNbYX1A7H.K',2,1111111111,1111111111,'teet 123',1,'matbruc','2020-08-22 22:47:14',NULL,0,'',NULL),(9,'Mat','Bruc','mat@bruc.com','$2y$04$PO3tmqTTV7jSU1cBoQhlfOAwpNFUD8NGgt5hauc8I8FMZSzjxdfbe',1,1111111111,1111111111,'Test 123',282,'matbruc','2020-08-22 22:49:33',NULL,0,'',NULL),(10,'Matias','Bruchi','matiasbruchi@gmail.com','$2y$04$eUz6rlRuYcQtESojpoRfzOpDKmop2Vt4H0kUXf21m4kBlAaNo/1du',2,111111111,111111111,'Calle Falsa 123',323,'','2020-09-09 19:14:33','',0,'','81f69dajey03trqk2upl');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -396,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-24 18:59:38
+-- Dump completed on 2020-09-24 22:13:13
