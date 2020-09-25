@@ -29,7 +29,7 @@ class SubcategoriaController{
             $producto = new Producto();
             $producto->setSubcategoria_id($id);
             $producto->setCategoria_id($catId);
-            $productos = $producto->getAllSubcategory();
+            $productos = $producto->getAllCategorySubcategory();
         }
 
         require_once 'views/producto/lista.php';
