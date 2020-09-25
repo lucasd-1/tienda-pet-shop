@@ -7,6 +7,8 @@ require_once 'helpers/utils.php';
 require_once 'views/layout/header.php';
 require_once 'views/layout/sidebar.php';
 
+set_include_path('lib/phpmailer');
+
 function show_error(){
     $error = new errorController();
     $error->index();
