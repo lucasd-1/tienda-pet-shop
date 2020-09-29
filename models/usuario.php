@@ -152,7 +152,7 @@ class usuario{
         $sql = "INSERT INTO usuarios 
                 VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', 
                        '{$this->getEmail()}', '{$this->getPassword()}', {$this->getRol()}, 
-                       {$this->getDni()}, '{$this->getTelefono()}', 
+                       {$this->getDni()}, {$this->getTelefono()}, 
                        '{$this->getDireccion()}', '{$this->getLocalidad()}', '{$this->getUsername()}', 
                        NOW(), NULL, {$saldo}, '{$this->getImagenusuario()}', NULL);";
         $save = $this->db->query($sql);
@@ -161,6 +161,7 @@ class usuario{
         if($save){
             $result = true;
         }
+
         return $result;
     }
 

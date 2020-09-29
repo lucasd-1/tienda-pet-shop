@@ -22,10 +22,14 @@
 	<input type="password" name="password" required/>
         
     <label for="dni">DNI*</label>
-	<input type="number" name="dni" required>
+	<input type="number"
+           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           name="dni" maxlength="10" required>
         
     <label for="telefono">Telefono</label>
-	<input type="number" name="telefono">
+	<input type="number"
+           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           maxlength="10" name="telefono">
         
     <label for="direccion">Direccion</label>
 	<input type="text" name="direccion" >

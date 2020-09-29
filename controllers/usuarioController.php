@@ -139,6 +139,7 @@ class usuarioController{
                 }
 
                 $save = $usuario->save();
+
 				if($save){
 					$_SESSION['register'] = 'complete';
 				}else{
