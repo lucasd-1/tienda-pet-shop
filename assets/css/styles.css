@@ -11,11 +11,11 @@
 /*}*/
 
 a{
-    color: #01B1EA;
+    color: #1d2427;
 }
 
 a:visited{
-    color: #01B1EA;
+    color: #1d2427;
 }
 
 a:hover{
@@ -56,19 +56,18 @@ td{
 /*HEADER*/
 
 #header{
-    height: 145px;
+    height: 180px;
     background: #F0F0F0;
 }
 
 #logo{
-    padding: 20px;
     margin-left: 20px;
     float:left;
 }
 
 #logo img{
     float:left;
-    height: 100px;
+    height: 179px;
 }
 
 #logo a{
@@ -88,6 +87,13 @@ td{
 
 #logo a:hover{
     text-shadow: 0px 2px 1px #222222, 0px 0px 4px #01B1EA;
+}
+
+.busqueda {
+    float: right;
+    width: 75%;
+    margin-top: 90px;
+    margin-right: 20px;
 }
 
 /*MENU*/
@@ -148,6 +154,7 @@ td{
     margin-left: auto;
     margin-right: auto;
 }
+
 /*CONTENT*/
 #content{
     margin: 0px auto;
@@ -377,15 +384,97 @@ button{
 }
 
 
+
 /*FOOTER*/
 #footer{
-    clear: both;
-    text-align: center;
-    padding-top:10px;
-    padding-bottom: 10px;
-    color: white;
-    background: #222222;
-    border-top: 4px solid #01B1EA;
+    background: #F0F0F0;
+    height: 250px;
+}
+
+#abajo {
+    width: 1000px;
+    height: 250px;
+    padding: 0%;
+    margin: 0%;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+#logito img{
+    float:right;
+    height: 120px;
+    margin-left: 650px;
+    margin-right: auto;
+    margin-top: 25px;
+    position:absolute
+}
+#datafiscal img{
+    float: left;
+    height: 80px;
+    margin-left: 940px;
+    margin-right: auto;
+    margin-top: 45px;
+    position:absolute
+
+}
+
+#mercadopago img{
+    float: left;
+    height: 80px;
+    margin-left: 850px;
+    margin-right: auto;
+    margin-top: 45px;
+    position:absolute
+}
+
+#redes img{
+    padding: 0px;
+    height: 35px;
+    margin-top:160px;
+    margin-left: 0px;
+    float: right;
+}
+
+#pp{
+    float: left;
+    color: rgb(17, 19, 19);
+    font-size: 25px;
+    /*  text-align: center; */
+    margin-top: 180PX;
+    margin-left: auto;
+    margin-left: 250px;
+    position:absolute
+}
+
+
+#CATEGORIAS{
+    float: left;
+    margin-left: 25px;
+    margin-top: 40px;
+    margin-bottom: 0%;
+    position: relative;
+
+}
+#CARRITO{
+
+    margin-left: 60px;
+    margin-top: 40px;
+    float: left;
+    margin-bottom: 0%;
+    position: relative;
+
+}
+
+#CONTACTO{
+    float: left;
+    margin-left: 60px;
+    margin-top: 40px;
+    margin-right: 25px;
+    margin-bottom: 0%;
+    position: relative;
+
 }
 
 /*CARRITO*/
