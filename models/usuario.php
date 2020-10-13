@@ -180,30 +180,28 @@ class usuario{
         $this->setImagenusuario($user->imagen);
     }
 
-    public function edit(){
-        $sql = "UPDATE usuarios SET 
-                    nombre='{$this->getNombre()}',  
-                    apellidos='{$this->getApellidos()}',  
-                    email='{$this->getEmail()}',  
-                    password='{$this->getPassword()}',  
-                    permiso_id={$this->getRol()},   
-                    dni={$this->getDni()}, 
-                    telefono={$this->getTelefono()}, 
-                    direccion='{$this->getDireccion()}', 
-                    localidad_id={$this->getLocalidad()}, 
-                    username='{$this->getUsername()}', 
-                    password='{$this->getPassword()}', 
-                    fecha_ult_pedido='{$this->getFechaUltimoPedido()}', 
-                    saldo={$this->getSaldo()}
-                 ";
+    public function edit() {
+        $sql = "UPDATE usuarios set
+                nombre='{$this->getNombre()}',
+                apellidos='{$this->getApellidos()}',
+                email='{$this->getEmail()}',
+                dni={$this->getDni()},
+                telefono={$this->getTelefono()},
+                direccion='{$this->getDireccion()}',
+                localidad_id={$this->getLocalidad()}";
 
         if($this->getImagenusuario() != null){
             $sql .= ", imagen='{$this->getImagenusuario()}'";
         }
 
-        $sql .= " WHERE email='{$this->getEmail()}';";
+        $sql .= " WHERE id={$this->id};";
+        $save = $this->db->query($sql);
 
-        return $this->db->query($sql);
+        $result = false;
+        if($save){
+            $result = true;
+        }
+        return $result;
     }
     
     public function login(){
@@ -228,7 +226,12 @@ class usuario{
         }
         return $result;
     }
-    
+
+    public function getOne() {
+        $usuario = $this->db->query("SELECT * FROM usuarios WHERE id = {$this->getId()}");
+        return $usuario->fetch_object();
+    }
+
     function saveToken(){
         $update = "UPDATE usuarios SET token = '{$this->getToken()}' "
                 . "WHERE email = '{$this->getEmail()}'";

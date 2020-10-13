@@ -1,5 +1,5 @@
 <?php
-ob_start();
+    ob_start() 
 ?>
 <!DOCTYPE HTML>
 <html lang="es">

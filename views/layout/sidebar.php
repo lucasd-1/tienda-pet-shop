@@ -32,9 +32,11 @@
                 <li><a href="<?=base_url?>subcategoria/index">Gestionar subcategorias</a></li>
                 <li><a href="<?=base_url?>producto/gestion">Gestionar productos</a></li>
                 <li><a href="<?=base_url?>pedido/gestion">Gestionar pedidos</a></li>
+                <li><a href="<?=base_url?>reporte/ver">Reportes</a></li>
             <?php endif; ?>
 
             <?php if(isset($_SESSION['identity'])): ?>
+                <li><a href="<?=base_url?>usuario/miPerfil">Mis datos personales</a></li>
                 <li><a href="<?=base_url?>pedido/mis_pedidos">Mis pedidos</a></li>
                 <li><a href="<?=base_url?>usuario/logout">Cerrar sesión</a></li>
             <?php else: ?>

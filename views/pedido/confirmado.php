@@ -26,7 +26,7 @@
             <img src="<?= base_url ?>uploads/images/<?= $producto->imagen?>" class="img_carrito"/>
         </td>
         <td><a href="<?= base_url ?>producto/ver&id=<?=$producto->id?>"><?=$producto->nombre?></a></td>
-        <td><?= $producto->precio ?></td>
+        <td> $ <?= $producto->precio ?></td>
         <td><?=$producto->unidades?></td>
             
     </tr>

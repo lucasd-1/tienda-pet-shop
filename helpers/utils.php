@@ -80,4 +80,23 @@ class Utils{
 		
 		return $value;
 	}
+
+	public static function getCsv($result, $filename) {
+        $head[] = [];
+        header('Content-type: application/csv');
+        header('Content-Disposition: attachment; filename='.$filename.'.csv');
+        ob_end_clean();
+        $headers = $result->fetch_fields();
+        foreach($headers as $header) {
+            $head[] = $header->name;
+        }
+        $f = fopen('php://output', 'w');
+        fputcsv($f, array_values($head));
+        while ($row = mysqli_fetch_row($result)) {
+            fputcsv($f, $row);
+        }
+        fclose($f);
+        exit;
+    }
+
 }

@@ -129,5 +129,4 @@ class pedidoController{
 	    require_once 'views/pedido/abonar.php';
     }
 	
-	
 }

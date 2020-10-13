@@ -187,7 +187,8 @@ class Producto{
 	}
         
     public function buscarProduct($busqueda){
-        $productos = $this->db->query("SELECT * FROM productos WHERE nombre LIKE '%$busqueda%'");
+        $productos = $this->db->query("SELECT * FROM productos WHERE nombre LIKE '%$busqueda%' 
+                           or tags LIKE '%$busqueda%' or descripcion LIKE '%$busqueda%'");
         return $productos;
     }
       

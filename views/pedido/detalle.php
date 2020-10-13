@@ -47,7 +47,7 @@
                     <a href="<?= base_url ?>producto/ver&id=<?= $producto->id ?>"><?= $producto->nombre ?></a>
                 </td>
                 <td>
-                    <?= $producto->precio ?>
+                   $ <?= $producto->precio ?>
                 </td>
                 <td>
                     <?= $producto->unidades ?>

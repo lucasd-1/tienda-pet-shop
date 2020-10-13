@@ -154,7 +154,36 @@ class usuarioController{
 
 		header("Location:".base_url.'usuario/registro');
 	}
-	
+
+	public function edit() {
+        if(isset($_POST)){
+
+            $usuario = new Usuario();
+            $usuario->setId($_SESSION['identity']->id);
+
+            $usuario->setNombre($_POST['nombre']);
+            $usuario->setApellidos($_POST['apellidos']);
+            $usuario->setEmail($_POST['email']);
+            $usuario->setUsername($_POST['username']);
+            $usuario->setDni($_POST['dni']);
+            $usuario->setTelefono($_POST['telefono']);
+            $usuario->setDireccion($_POST['direccion']);
+            $usuario->setLocalidad($_POST['localidad']);
+
+            $save = $usuario->edit();
+            if($save){
+                $_SESSION['identity'] = $usuario->getOne();
+                $_SESSION['register'] = "complete";
+            }else{
+                $_SESSION['register'] = "failed";
+            }
+        } else{
+            $_SESSION['register'] = "failed";
+        }
+
+        header("Location:".base_url.'usuario/miPerfil');
+    }
+
 	public function login(){
 		if(isset($_POST)){
 			// Identificar al usuario
@@ -198,6 +227,51 @@ class usuarioController{
         $loc_filtradas = $localidad->getByProvincia();
         require_once 'views/usuario/getLocalidades.php';
     }
+    
+    public function miPerfil() {
+	    if (isset($_SESSION['identity'])) {
+            $usuario = $_SESSION['identity'];
+            $localidad = new Localidad();
+            $provincia = new Provincia();
+            $localidad->setId($_SESSION['identity']->localidad_id ?? 0);
+            if ($localidad->getId() > 0) {
+                $debug = 'true';
+                $ciudad = $localidad->getOne();
+                $localidad->setLocalidad($ciudad->localidad);
+                $provincia->setId($ciudad->id_provincia);
+                $prov = $provincia->getOne();
+                $provincia->setProvincia($prov->provincia);
+            } else {
+                $localidad->setLocalidad('');
+                $provincia->setProvincia('');
+            }
+        }
+        require_once 'views/usuario/miPerfil.php';
+    }
+        
+    public function editar() {
+        $usuario = $_SESSION['identity'] ?? false;
+        $provincia = new Provincia();
+        $provincias = $provincia->getAll();
+        $localidad = new Localidad();
+        if (isset($usuario->localidad_id)) {
+            $localidad->setId($usuario->localidad_id);
+            $loc = $localidad->getOne();
+            $localidad->setIdProvincia($loc->id_provincia);
+            $localidades = $localidad->getByProvincia();
+            $localidad->setLocalidad($loc->localidad_id);
+            $provincia->setId($localidad->getIdProvincia());
+            $provincia->setProvincia($localidad->getNombreProvincia());
+        } else {
+            $localidad->setLocalidad('');
+            $provincia->setProvincia('');
+            $localidad->setIdProvincia(1);
+            $localidades = $localidad->getByProvincia();
+        }
+
+        require_once 'views/usuario/editar.php';
+	}
+
 
     // TODO: mover a helpers/utils despues de mergear
     // ----- Enviar email con phpmailer -----
