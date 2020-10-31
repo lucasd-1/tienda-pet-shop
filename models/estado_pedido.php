@@ -45,4 +45,8 @@ class Estado_Pedido {
         $estado_pedido = $this->db->query("SELECT * FROM estados_pedidos WHERE id = {$this->getId()}")->fetch_object();
         $this->setDescripcion($estado_pedido->descripcion);
     }
+
+    public function getAll(){
+        return $this->db->query("SELECT * FROM estados_pedidos");
+    }
 }

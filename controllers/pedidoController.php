@@ -111,9 +111,11 @@ class pedidoController{
 			
 			// Sacar el pedido
 			$pedido_obj = new Pedido();
+			$estado_ped = new Estado_Pedido();
 			$pedido_obj->setId($id);
 			$pedido = $pedido_obj->getOne();
 			$productos = $pedido_obj->getProductosByPedido($id);
+			$estados = $estado_ped->getAll();
 			
 			require_once 'views/pedido/detalle.php';
 		}else{

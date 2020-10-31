@@ -6,11 +6,9 @@
         <form action="<?= base_url ?>pedido/estado" method="POST">
             <input type="hidden" value="<?= $pedido->id ?>" name="pedido_id"/>
             <select name="estado">
-                <option value=1 <?= $pedido->id_estado_pedido == 1 ? 'selected' : ''; ?>>Pendiente</option>
-                <option value=5 <?= $pedido->id_estado_pedido == 5 ? 'selected' : ''; ?>>Abonado</option>
-                <option value=6 <?= $pedido->id_estado_pedido == 6 ? 'selected' : ''; ?>>En preparación</option>
-                <option value=3 <?= $pedido->id_estado_pedido == 3 ? 'selected' : ''; ?>>Preparado para enviar</option>
-                <option value=4 <?= $pedido->id_estado_pedido == 4 ? 'selected' : ''; ?>>Enviado</option>
+                <?php while($est = $estados->fetch_object()): ?>
+                    <option value=<?=$est->id?> <?= $pedido->id_estado_pedido == $est ? 'selected' : ''; ?>><?=$est->descripcion?></option>
+                <?php endwhile; ?>
             </select>
             <input type="submit" value="Cambiar estado" />
         </form>
