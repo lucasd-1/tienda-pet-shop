@@ -1,0 +1,9 @@
+<h1>Términos y Condiciones </h1>
+<p>Bienvenidos a Petit Pet Shop, la tienda para mascotas donde comprás fácil y al mejor precio.
+    Éste es un servicio de Petit Shop S.R.L. Por favor, leé las siguientes reglas básicas que rigen el uso de este sitio (en adelante, las “Reglas”).</p>
+<p>Nuestra cobertura geográfica en cuanto a entregas a domicilio se encuentra detallada en la sección de las preguntas frecuentes, en la sección de envíos. Cualquier entrega que se solicite para un destino fuera de este área queda sujeta a la disponibilidad de la empresa.</p>
+<p>El uso de "petit-shop.herokuapp.com" (el “website”) implica aceptar incondicional e irrevocablemente que toda la información las actividades que se realicen a través del mismo se hallan regidas por las Reglas. Asimismo, Petit Shop S.R.L. podrá cambiar las Reglas en cualquier momento y a su exclusivo criterio. Por tal razón, te pedimos revises este apartado periódicamente. En caso de no encontrarte de acuerdo con lo expresado en esta sección, te pedimos te abstengas de utilizar nuestro sitio web.</p>
+<p>Petit Shop S.R.L. se reserva el derecho de interrumpir o modificar el servicio que ofrece, ya sea en forma transitoria o permanente, sin aviso previo y/o consentimiento de sus usuarios y en cualquier momento a su exclusivo criterio.</p>
+<h1>USO DEL WEBSITE</h1>
+<p>El usuario acepta las Reglas mediante el solo uso del sitio web y declara bajo juramento tener 18 o más años de edad. Si sos menor de 18 años, te pedimos te abstengas de utilizar este sitio. </p><p>Los padres, tutores o responsables de los menores de 18 años que utilicen el website son los exclusivos responsables por el uso del mismo por parte de los menores incluyendo, y sin limitar, cualquier cargo o costo en que se incurra como consecuencia de tal uso.</p>
+
