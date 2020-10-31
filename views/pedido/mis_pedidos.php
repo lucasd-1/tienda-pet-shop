@@ -5,10 +5,10 @@
 <?php endif; ?>
 <table>
     <tr>
-        <th>N° Pedido</th>
-        <th>Coste</th>
-        <th>fecha</th>
-        <th>Estado</th>
+        <th style="text-align: center">N° Pedido</th>
+        <th style="text-align: center">Costo</th>
+        <th style="text-align: center">Fecha</th>
+        <th style="text-align: center">Estado</th>
     </tr>
   <?php 
         while($ped = $pedidos->fetch_object()) :
