@@ -15,56 +15,27 @@
 </head>
 
 <body>
-<div id="container">
-    <!-- CABECERA -->
-    <header id="header">
-        <div id="logo">
-            <img src="<?=base_url?>assets/img/gatitolog.png" alt="pet logo" />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="<?=base_url?>assets/img/logo-petit-shop.png" alt="pet logo" />
         </div>
-        <!-- Busqueda -->
-        <form class="busqueda" action="<?=base_url?>producto/buscar" method="post">
-            <div class="input-group">
-                <input class="form-control" name="busqueda" type="text" placeholder="Buscar" aria-label="Search">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
+        <div class="col-sm-6">
+            <!-- Busqueda -->
+            <form class="busqueda" action="<?=base_url?>producto/buscar" method="post">
+                <div class="input-group">
+                    <input class="form-control" name="busqueda" type="text" placeholder="Buscar" aria-label="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </header>
-
-    <!-- MENU -->
-    <?php $categorias = Utils::showCategorias(); ?>
-    <nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Petit Shop</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="<?=base_url?>">Home</a></li>
-                <?php while($cat = $categorias->fetch_object()): ?>
-                    <?php $subcategorias = Utils::showSubcategorias(); ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?=$cat->nombre?>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <?php while($subcat = $subcategorias->fetch_object()): ?>
-                                <li>
-                                    <a href="<?=base_url?>subcategoria/ver&catId=<?=$cat->id?>&id=<?=$subcat->id?>">
-                                        <?=$subcat->nombre?>
-                                    </a>
-                                </li>
-                            <?php endwhile; ?>
-                        </ul>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
+            </form>
         </div>
-    </nav>
+    </div>
 
-    <div class="container" style="padding-left: 0px; padding-right: 18px;">
+    <div class="row">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -99,5 +70,41 @@
             </a>
         </div>
     </div>
+
+    <div class="row">
+        <!-- MENU -->
+        <?php $categorias = Utils::showCategorias(); ?>
+        <nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Petit Shop</a>
+                </div>
+                <ul class="nav navbar-nav navbar-center">
+                    <li><a href="<?=base_url?>">Home</a></li>
+                    <?php while($cat = $categorias->fetch_object()): ?>
+                        <?php $subcategorias = Utils::showSubcategorias(); ?>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?=$cat->nombre?>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php while($subcat = $subcategorias->fetch_object()): ?>
+                                    <li>
+                                        <a href="<?=base_url?>subcategoria/ver&catId=<?=$cat->id?>&id=<?=$subcat->id?>">
+                                            <?=$subcat->nombre?>
+                                        </a>
+                                    </li>
+                                <?php endwhile; ?>
+                            </ul>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+
+
 
     <div id="content">

@@ -6,10 +6,11 @@
         <form action="<?= base_url ?>pedido/estado" method="POST">
             <input type="hidden" value="<?= $pedido->id ?>" name="pedido_id"/>
             <select name="estado">
-                <option value="confirm" <?= $pedido->estado == "confirm" ? 'selected' : ''; ?>>Pendiente</option>
-                <option value="preparation" <?= $pedido->estado == "preparation" ? 'selected' : ''; ?>>En preparación</option>
-                <option value="ready" <?= $pedido->estado == "ready" ? 'selected' : ''; ?>>Preparado para enviar</option>
-                <option value="sended" <?= $pedido->estado == "sended" ? 'selected' : ''; ?>>Enviado</option>
+                <option value=1 <?= $pedido->id_estado_pedido == 1 ? 'selected' : ''; ?>>Pendiente</option>
+                <option value=5 <?= $pedido->id_estado_pedido == 5 ? 'selected' : ''; ?>>Abonado</option>
+                <option value=6 <?= $pedido->id_estado_pedido == 6 ? 'selected' : ''; ?>>En preparación</option>
+                <option value=3 <?= $pedido->id_estado_pedido == 3 ? 'selected' : ''; ?>>Preparado para enviar</option>
+                <option value=4 <?= $pedido->id_estado_pedido == 4 ? 'selected' : ''; ?>>Enviado</option>
             </select>
             <input type="submit" value="Cambiar estado" />
         </form>
@@ -22,17 +23,17 @@
     Direccion: <?= $pedido->direccion ?>   <br/><br/>
 
     <h3>Datos del pedido:</h3>
-    Estado: <?= Utils::showStatus($pedido->estado) ?> <br/>
+    Estado: <?= utils::showStatus($pedido->id_estado_pedido)?> <br/>
     Número de pedido: <?= $pedido->id ?>   <br/>
     Total a pagar: <?= $pedido->coste ?> $ <br/>
     Productos:
 
     <table>
         <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Unidades</th>
+            <th style="text-align: center">Imagen</th>
+            <th style="text-align: center">Nombre</th>
+            <th style="text-align: center">Precio</th>
+            <th style="text-align: center">Unidades</th>
         </tr>
         <?php while ($producto = $productos->fetch_object()): ?>
             <tr>

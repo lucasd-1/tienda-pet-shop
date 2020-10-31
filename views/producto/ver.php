@@ -9,16 +9,13 @@
                 </a>
                 <p class="description"><?= $product->descripcion ?></p>
                 <p class="price"> $ <?= $product->precio ?></p>
-                <a href="<?=base_url?>carrito/add&id=<?=$product->id?>" class="button">Comprar</a>
+                <a href="<?=base_url?>carrito/add&id=<?=$product->id?>" class="btn btn-success">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    Agregar al Carrito
+                </a>
             </div>
         </div>
 
 <?php else: ?>
     <h1>El producto no existe</h1>
 <?php endif; ?>
-
-
-<!--
-id = .
-class = #
--->

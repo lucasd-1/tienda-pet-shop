@@ -38,3 +38,17 @@ $(document).on('click', '#enviar-email', event => {
     $(event.target).button('loading');
 })
 
+$(document).on('click', '#activar-pago-online', event => {
+    const parent = $(event.target).closest($('#abonar-pedido'))
+    // const selectorPago = parent.find(it => it.id === 'selector-pago');
+    // const pagoOnline = parent.find(it => it.id === 'pago-online');
+
+    const selectorPago = $(event.target).closest('div#selector-pago');
+    const pagoOnline = parent.find('div#pago-online');
+
+    console.log(parent);
+    selectorPago.attr('style', 'display: none;');
+    pagoOnline.attr('style', 'display: block;');
+
+})
+

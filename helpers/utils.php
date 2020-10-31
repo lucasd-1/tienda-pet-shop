@@ -1,5 +1,7 @@
 <?php
 
+require_once 'models/estado_pedido.php';
+
 class Utils{
 	
 	public static function deleteSession($name){
@@ -66,19 +68,10 @@ class Utils{
 	}
 	
 	public static function showStatus($status){
-		$value = 'Pendiente';
-		
-		if($status == 'confirm'){
-			$value = 'Pendiente';
-		}elseif($status == 'preparation'){
-			$value = 'En preparación';
-		}elseif($status == 'ready'){
-			$value = 'Preparado para enviar';
-		}elseif($status = 'sended'){
-			$value = 'Enviado';
-		}
-		
-		return $value;
+		$estado = new Estado_Pedido();
+		$estado->setId($status);
+		$estado->getOne();
+		return $estado->getDescripcion();
 	}
 
 	public static function getCsv($result, $filename) {

@@ -62,7 +62,7 @@ class carritoController{
 			$index = $_GET['index'];
 			$_SESSION['carrito'][$index]['unidades']++;
 		}
-		header("Location:".base_url."carrito/index");
+		header("Location:".base_url."carrito/index#carrito-title");
 	}
 	
 	public function down(){
@@ -74,7 +74,7 @@ class carritoController{
 				unset($_SESSION['carrito'][$index]);
 			}
 		}
-		header("Location:".base_url."carrito/index");
+		header("Location:".base_url."carrito/index#carrito-title");
 	}
 	
 	public function delete_all(){

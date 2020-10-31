@@ -8,10 +8,10 @@ class Pedido{
     private $localidad;
     private $direccion;
     private $coste;
-    private $estado;
+    private $id_estado_pedido;
     private $fecha;
     private $hora;
-    
+
     private $db;
     
      public function __construct() {
@@ -43,8 +43,8 @@ class Pedido{
          return $this->coste;
      }
 
-     function getEstado() {
-         return $this->estado;
+     function getIdEstadoPedido() {
+         return $this->id_estado_pedido;
      }
 
      function getFecha() {
@@ -79,8 +79,8 @@ class Pedido{
          $this->coste = $coste;
      }
 
-     function setEstado($estado) {
-         $this->estado = $estado;
+     function setIdEstadoPedido($id_estado_pedido) {
+         $this->id_estado_pedido = $id_estado_pedido;
      }
 
      function setFecha($fecha) {
@@ -132,9 +132,9 @@ class Pedido{
                 . "INNER JOIN lineas_pedidos lp ON pr.id = lp.producto_id "
                 . "WHERE lp.pedido_id={$id}";
              
-            $productos = $this->db->query($sql);
-            
-            return $productos;
+        $productos = $this->db->query($sql);
+
+        return $productos;
     }
      
     public function save(){
@@ -160,7 +160,7 @@ class Pedido{
             $result = true;
         }
         return $result;
-    } 
+    }
     
     public function save_linea(){
         $sql = "SELECT LAST_INSERT_ID() as 'pedido';";
@@ -186,7 +186,7 @@ class Pedido{
   }
   
   public function edit(){
-		$sql = "UPDATE pedidos SET estado='{$this->getEstado()}' ";
+		$sql = "UPDATE pedidos SET id_estado_pedido={$this->getIdEstadoPedido()}";
 		$sql .= " WHERE id={$this->getId()};";
 		
 		$save = $this->db->query($sql);

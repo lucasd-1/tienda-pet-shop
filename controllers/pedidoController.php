@@ -1,19 +1,46 @@
 <?php
 require_once 'models/pedido.php';
+require_once 'models/estado_pedido.php';
+require_once 'models/provincia.php';
+require_once 'models/localidad.php';
 
 class pedidoController{
+
+    public function getLocalidades() {
+        $localidad = new Localidad();
+        $localidad->setIdProvincia($_POST['prov_id']);
+        $loc_filtradas = $localidad->getByProvincia();
+        require_once 'views/usuario/getLocalidades.php';
+    }
 	
-	public function hacer(){
-		
-		require_once 'views/pedido/hacer.php';
+	public function envio(){
+        $provincia = new Provincia();
+        $provincias = $provincia->getAll();
+        $localidad = new Localidad();
+        $localidad->setIdProvincia(1);
+        $localidades = $localidad->getByProvincia();
+		require_once 'views/pedido/envio.php';
 	}
+
+    public function pago(){
+        $provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
+        $localidad = isset($_POST['localidad']) ? $_POST['localidad'] : false;
+        $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
+        require_once 'views/pedido/abonar.php';
+    }
 	
 	public function add(){
 		if(isset($_SESSION['identity'])){
 			$usuario_id = $_SESSION['identity']->id;
-			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
-			$localidad = isset($_POST['localidad']) ? $_POST['localidad'] : false;
-			$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
+			$prov = isset($_POST['provincia']) ? $_POST['provincia'] : 1;
+			$loc = isset($_POST['localidad']) ? $_POST['localidad'] : 1;
+			$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : '';
+
+			$provincia = new Provincia();
+			$localidad = new Localidad();
+			$provincia->setId($prov);
+			$localidad->setId($loc);
+
 			
 			$stats = Utils::statsCarrito();
 			$coste = $stats['total'];
@@ -22,25 +49,26 @@ class pedidoController{
 				// Guardar datos en bd
 				$pedido = new Pedido();
 				$pedido->setUsuario_id($usuario_id);
-				$pedido->setProvincia($provincia);
-				$pedido->setLocalidad($localidad);
+				$pedido->setProvincia($provincia->getOne()->provincia);
+				$pedido->setLocalidad($localidad->getOne()->localidad);
 				$pedido->setDireccion($direccion);
 				$pedido->setCoste($coste);
 				
 				$save = $pedido->save();
-				
+
 				// Guardar linea pedido
 				$save_linea = $pedido->save_linea();
 
                 if($save && $save_linea){
 					$_SESSION['pedido'] = "complete";
-				}else{
+                    unset($_SESSION['carrito']);
+                }else{
 					$_SESSION['pedido'] = "failed";
 				}
 				
 			}else{
 				$_SESSION['pedido'] = "failed";
-			}
+            }
 			
 			header("Location:".base_url.'pedido/confirmado');			
 		}else{
@@ -52,10 +80,10 @@ class pedidoController{
 	public function confirmado(){
 		if(isset($_SESSION['identity'])){
 			$identity = $_SESSION['identity'];
-			$pedido = new Pedido();
-			$pedido->setUsuario_id($identity->id);
+			$pedido_ = new Pedido();
+			$pedido_->setUsuario_id($identity->id);
 			
-			$pedido = $pedido->getOneByUser();
+			$pedido = $pedido_->getOneByUser();
 			
 			$pedido_productos = new Pedido();
 			$productos = $pedido_productos->getProductosByPedido($pedido->id);
@@ -82,13 +110,10 @@ class pedidoController{
 			$id = $_GET['id'];
 			
 			// Sacar el pedido
-			$pedido = new Pedido();
-			$pedido->setId($id);
-			$pedido = $pedido->getOne();
-			
-			// Sacar los poductos
-			$pedido_productos = new Pedido();
-			$productos = $pedido_productos->getProductosByPedido($id);
+			$pedido_obj = new Pedido();
+			$pedido_obj->setId($id);
+			$pedido = $pedido_obj->getOne();
+			$productos = $pedido_obj->getProductosByPedido($id);
 			
 			require_once 'views/pedido/detalle.php';
 		}else{
@@ -116,10 +141,10 @@ class pedidoController{
 			// Upadate del pedido
 			$pedido = new Pedido();
 			$pedido->setId($id);
-			$pedido->setEstado($estado);
+			$pedido->setIdEstadoPedido($estado);
 			$pedido->edit();
-			
-			header("Location:".base_url.'pedido/detalle&id='.$id);
+
+            header("Location:".base_url.'pedido/detalle&id='.$id);
 		}else{
 			header("Location:".base_url);
 		}

@@ -11,14 +11,15 @@
 
     Número de pedido: <?=$pedido->id?> </br>
     Total a pagar: $<?=$pedido->coste?> </br>
-    Productos:
-    <table>
+    <p>
+        Productos:
+    </p>
+        <table>
         <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Unidades</th>
-                    <th>Eliminar</th>
+                    <th style="text-align: center">Imagen</th>
+                    <th style="text-align: center">Nombre</th>
+                    <th style="text-align: center">Precio</th>
+                    <th style="text-align: center">Unidades</th>
                 </tr>
     <?php while($producto = $productos->fetch_object()) :?>
     <tr>
@@ -36,4 +37,7 @@
     
 <?php elseif (isset($_SESSION['pedido']) && $_SESSION['pedido'] != 'complete'): ?>
 <h1>Tu pedido NO ha podido procesarse</h1>
+<p><?= $_SESSION['debug'] ?></p>
+<p><?= $_SESSION['debug2'] ?></p>
+
 <?php endif; ?>
