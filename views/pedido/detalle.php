@@ -7,7 +7,7 @@
             <input type="hidden" value="<?= $pedido->id ?>" name="pedido_id"/>
             <select name="estado">
                 <?php while($est = $estados->fetch_object()): ?>
-                    <option value=<?=$est->id?> <?= $pedido->id_estado_pedido == $est ? 'selected' : ''; ?>><?=$est->descripcion?></option>
+                    <option value=<?=$est->id?> <?= $pedido->id_estado_pedido == $est->id ? 'selected' : ''; ?>><?=$est->descripcion?></option>
                 <?php endwhile; ?>
             </select>
             <input type="submit" value="Cambiar estado" />
