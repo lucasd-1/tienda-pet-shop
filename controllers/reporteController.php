@@ -14,7 +14,10 @@ class reporteController {
     public function getReporte() {
         $reporte = new Reporte();
 
-        if(isset($_GET['button'])) {
+        if(isset($_POST['dateDesde']) && isset($_POST['dateHasta'])) {
+            $dbResult = $reporte->getReportePedidosByDate($_POST['dateDesde'], $_POST['dateHasta']);
+            Utils::getCsv($dbResult, "pedidos-".date("YmdHis"));
+        } else if(isset($_GET['button'])) {
             switch($_GET['button']) {
                 case 'pedidos':
                     $dbResult = $reporte->getReportePedidos();
