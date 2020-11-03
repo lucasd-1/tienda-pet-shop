@@ -80,10 +80,9 @@
         <nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Petit Shop</a>
+                    <a class="navbar-brand" href="<?=base_url?>">Home</a>
                 </div>
                 <ul class="nav navbar-nav navbar-center">
-                    <li><a href="<?=base_url?>">Home</a></li>
                     <?php while($cat = $categorias->fetch_object()): ?>
                         <?php $subcategorias = Utils::showSubcategorias(); ?>
                         <li class="dropdown">
