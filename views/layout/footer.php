@@ -20,7 +20,7 @@
                         <?php $categorias = Utils::showCategorias(); ?>
                         <li><p><a href="<?=base_url?>">CATEGORIAS</a></p></li>
                         <?php while($cat = $categorias->fetch_object()): ?>
-                            <li><a href="<?=base_url?>categoria/ver&catId=<?=$cat->id?>"><?=$cat->nombre?></a></li>
+                            <li><a href="<?=base_url?>categoria/ver&id=<?=$cat->id?>"><?=$cat->nombre?></a></li>
                         <?php endwhile; ?>
                     </ul>
                 </div>
