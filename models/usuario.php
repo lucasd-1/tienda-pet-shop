@@ -167,6 +167,7 @@ class usuario{
 
     public function refreshUserByEmail() {
         $user = $this->db->query("SELECT * FROM usuarios WHERE email = '{$this->getEmail()}'")->fetch_object();
+        $this->setId($user->id);
         $this->setNombre($user->nombre);
         $this->setApellidos($user->apellidos);
         $this->setRol($user->permiso_id);
@@ -188,13 +189,14 @@ class usuario{
                 dni={$this->getDni()},
                 telefono={$this->getTelefono()},
                 direccion='{$this->getDireccion()}',
-                localidad_id={$this->getLocalidad()}";
+                localidad_id={$this->getLocalidad()},
+                password='{$this->getPassword()}'";
 
         if($this->getImagenusuario() != null){
             $sql .= ", imagen='{$this->getImagenusuario()}'";
         }
 
-        $sql .= " WHERE id={$this->id};";
+        $sql .= " WHERE id={$this->getId()};";
         $save = $this->db->query($sql);
 
         $result = false;
