@@ -190,7 +190,8 @@ class usuario{
                 telefono={$this->getTelefono()},
                 direccion='{$this->getDireccion()}',
                 localidad_id={$this->getLocalidad()},
-                password='{$this->getPassword()}'";
+                password='{$this->getPassword()}',
+                username='{$this->getUsername()}'";
 
         if($this->getImagenusuario() != null){
             $sql .= ", imagen='{$this->getImagenusuario()}'";
